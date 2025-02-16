@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Food Delivery</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Add Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Add Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">
+      <h1><i class="fas fa-utensils"></i> CampusEats</h1>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
+        <li><a href="#menu"><i class="fas fa-pizza-slice"></i> Menu</a></li>
+        <li><a href="#order"><i class="fas fa-shopping-cart"></i> Order</a></li>
+        <li><a href="#contact"><i class="fas fa-envelope"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content">
+      <h2>Delicious Food Delivered to Your Dorm</h2>
+      <p>Quick, easy, and convenient campus food delivery. Order your favorites from local eateries!</p>
+      <a href="#menu" class="btn"><i class="fas fa-arrow-right"></i> Explore Menu</a>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <section id="menu" class="menu">
+    <h2>Our Menu</h2>
+    <div class="menu-categories">
+      <button class="category-btn active">All</button>
+      <button class="category-btn">Burgers</button>
+      <button class="category-btn">Pizza</button>
+      <button class="category-btn">Asian</button>
+      <button class="category-btn">Desserts</button>
+    </div>
+    <div class="menu-items">
+      <div class="item" data-category="burgers">
+        <div class="item-img-container">
+          <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd" alt="Deluxe Burger">
+          <span class="badge">Bestseller</span>
+        </div>
+        <h3>Deluxe Burger</h3>
+        <p>The burger you’ve been craving!</p>
+        <p class="price">₹80</p>
+        <button class="btn" onclick="addToCart('Deluxe Burger', 80)">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+
+      <div class="item" data-category="pizza">
+        <div class="item-img-container">
+          <img src="https://images.unsplash.com/photo-1604382355076-af4b0eb60143" alt="Margherita Pizza">
+        </div>
+        <h3>Margherita Pizza</h3>
+        <p>Fresh mozzarella, tomatoes, and basil on thin crust</p>
+        <p class="price">₹199</p>
+        <button class="btn" onclick="addToCart('Margherita Pizza', 199)">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+
+      <div class="item" data-category="asian">
+        <div class="item-img-container">
+          <img src="https://images.unsplash.com/photo-1552611052-33e04de081de" alt="Ramen Bowl">
+          <span class="badge">New</span>
+        </div>
+        <h3>Ramen Bowl</h3>
+        <p>Authentic Pasta, Unforgettable Taste</p>
+        <p class="price">₹149</p>
+        <button class="btn" onclick="addToCart('Ramen Bowl', 149)">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+
+      <div class="item" data-category="desserts">
+        <div class="item-img-container">
+          <img src="https://images.unsplash.com/photo-1551024506-0bccd828d307" alt="Cheesecake">
+        </div>
+        <h3>NY Cheesecake</h3>
+        <p>Classic New York style cheesecake</p>
+        <p class="price">₹199</p>
+        <button class="btn" onclick="addToCart('NY Cheesecake', 199)">
+          <i class="fas fa-cart-plus"></i> Add to Cart
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Order Section -->
+  <section id="order" class="order">
+    <h2><i class="fas fa-shopping-basket"></i> Your Cart</h2>
+    
+    <!-- Cart Container -->
+    <div class="cart-container">
+      <!-- Cart Items -->
+      <div class="cart-items">
+        <div id="cart">
+          <p class="empty-cart"><i class="fas fa-shopping-cart"></i> Your cart is empty</p>
+        </div>
+      </div>
+
+      <!-- Cart Summary -->
+      <div class="cart-summary">
+        <h3>Order Summary</h3>
+        <div class="summary-item">
+          <span>Subtotal</span>
+          <span id="subtotal">₹0.00</span>
+        </div>
+        <div class="summary-item">
+          <span>Delivery Fee</span>
+          <span id="delivery-fee">₹40.00</span>
+        </div>
+        <div class="summary-total">
+          <span>Total</span>
+          <span id="total-amount">₹0.00</span>
+        </div>
+
+        <!-- Delivery Options -->
+        <div class="delivery-options">
+          <h4>Delivery Time</h4>
+          <select id="delivery-time">
+            <option value="asap">As soon as possible</option>
+            <option value="schedule">Schedule for later</option>
+          </select>
+          <div id="scheduled-time" class="hidden">
+            <input type="datetime-local" id="delivery-datetime">
+          </div>
+        </div>
+
+        <!-- Checkout Button -->
+        <button class="btn checkout-btn" onclick="proceedToCheckout()">
+          <i class="fas fa-check"></i> Proceed to Checkout
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Add a Features Section -->
+  <section class="features">
+    <div class="feature">
+      <i class="fas fa-clock"></i>
+      <h3>Quick Delivery</h3>
+      <p>30 minutes or less to your dorm</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-utensils"></i>
+      <h3>Fresh Food</h3>
+      <p>Made to order just for you</p>
+    </div>
+    <div class="feature">
+      <i class="fas fa-wallet"></i>
+      <h3>Crafted For Students</h3>
+      <p>By students , For students</p>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer id="contact">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Contact Us</h3>
+        <p><i class="fas fa-envelope"></i> support@campuseats.com</p>
+        <p><i class="fas fa-phone"></i> +91 70149 30330</p>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2025 CampusEats. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
