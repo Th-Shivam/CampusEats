@@ -142,87 +142,36 @@ nav a:hover::after {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
+  padding: 2rem 0;
 }
 
 .item {
-  background-color: white;
+  background: white;
   border-radius: 15px;
   overflow: hidden;
-  box-shadow: var(--shadow);
-  transition: var(--transition);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .item:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-.item img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-
-.item h3 {
-  padding: 1rem;
-  font-size: 1.4rem;
-  color: var(--secondary-color);
-}
-
-.item p {
-  padding: 0 1rem;
-  color: var(--accent-color);
-}
-
-.item .price {
-  font-size: 1.2rem;
-  font-weight: 600;
-  color: var(--primary-color);
-  padding: 0.5rem 1rem;
-}
-
-.item .btn {
-  margin: 1rem;
-  width: calc(100% - 2rem);
-}
-
-/* Menu Categories */
-.menu-categories {
-  display: flex;
-  justify-content: center;
-  gap: 1rem;
-  margin-bottom: 2rem;
-  flex-wrap: wrap;
-}
-
-.category-btn {
-  padding: 0.5rem 1.5rem;
-  border: 2px solid var(--primary-color);
-  border-radius: 25px;
-  background: transparent;
-  color: var(--primary-color);
-  cursor: pointer;
-  transition: var(--transition);
-  font-weight: 500;
-}
-
-.category-btn.active,
-.category-btn:hover {
-  background: var(--primary-color);
-  color: white;
-}
-
-/* Update Item Styling */
 .item-img-container {
   position: relative;
+  height: 200px;
   overflow: hidden;
 }
 
-.item img {
+.item-img-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform 0.5s ease;
 }
 
-.item:hover img {
+.item:hover .item-img-container img {
   transform: scale(1.1);
 }
 
@@ -230,12 +179,84 @@ nav a:hover::after {
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background: var(--gradient);
+  background: var(--primary-color);
   color: white;
   padding: 0.5rem 1rem;
   border-radius: 25px;
   font-size: 0.8rem;
   font-weight: 600;
+  box-shadow: 0 2px 10px rgba(255, 75, 43, 0.2);
+}
+
+.item-details {
+  padding: 1.5rem;
+}
+
+.item-details h3 {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+  color: var(--secondary-color);
+}
+
+.description {
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  min-height: 40px;
+}
+
+.item-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--primary-color);
+}
+
+.item .btn {
+  padding: 0.5rem 1.5rem;
+  font-size: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.item .btn i {
+  font-size: 1rem;
+}
+
+/* Menu Categories */
+.menu-categories {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.category-btn {
+  padding: 0.8rem 1.5rem;
+  border: 2px solid var(--primary-color);
+  border-radius: 25px;
+  background: transparent;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.category-btn.active,
+.category-btn:hover {
+  background: var(--primary-color);
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 75, 43, 0.2);
 }
 
 /* Features Section */
@@ -618,4 +639,52 @@ footer {
 
 .slide-in {
   animation: slideIn 0.3s ease forwards;
+}
+
+.canteen-selection {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.canteen-options {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.5rem;
+}
+
+.canteen-card {
+  background: rgba(255, 255, 255, 0.9);
+  padding: 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  width: 200px;
+  text-align: center;
+}
+
+.canteen-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.canteen-card i {
+  font-size: 2.5rem;
+  color: #ff6b6b;
+  margin-bottom: 1rem;
+}
+
+.canteen-card h4 {
+  margin: 0.5rem 0;
+  color: #333;
+}
+
+.canteen-card p {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+#selected-canteen {
+  text-align: center;
+  margin-bottom: 2rem;
 }

@@ -8,7 +8,85 @@ const productImages = {
     'NY Cheesecake': 'https://images.unsplash.com/photo-1551024506-0bccd828d307'
 };
 
-function addToCart(itemName, price) {
+// Menu items for each canteen
+const canteenMenus = {
+  'ab-dakshin': [
+    {
+      name: 'Masala Dosa',
+      description: 'Crispy rice crepe with spiced potato filling',
+      price: 60,
+      category: 'South Indian',
+      image: 'https://images.unsplash.com/photo-1643268972535-a2b100ff3632?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      badge: 'Bestseller'
+    },
+    {
+      name: 'Idli Sambar',
+      description: 'Steamed rice cakes with lentil soup and chutneys',
+      price: 45,
+      category: 'South Indian',
+      image: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc'
+    },
+    {
+      name: 'Chicken Biryani',
+      description: 'Fragrant rice cooked with spiced chicken',
+      price: 120,
+      category: 'North Indian',
+      image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8',
+      badge: 'Spicy'
+    }
+  ],
+  'mayuri': [
+    {
+      name: 'Butter Chicken',
+      description: 'Creamy tomato-based curry with tender chicken',
+      price: 180,
+      category: 'North Indian',
+      image: 'https://images.unsplash.com/photo-1603894584373-5ac82b2ae398',
+      badge: 'Popular'
+    },
+    {
+      name: 'Paneer Tikka',
+      description: 'Grilled cottage cheese with spices',
+      price: 140,
+      category: 'North Indian',
+      image: 'https://images.unsplash.com/photo-1599487488170-d11ec9c172f0'
+    },
+    {
+      name: 'Schezwan Noodles',
+      description: 'Spicy Chinese-style noodles with vegetables',
+      price: 110,
+      category: 'Chinese',
+      image: 'https://images.unsplash.com/photo-1585032226651-759b368d7246'
+    }
+  ],
+  'crcl': [
+    {
+      name: 'Vada Pav',
+      description: 'Spiced potato fritter in a bun',
+      price: 30,
+      category: 'Snacks',
+      image: 'https://images.unsplash.com/photo-1606491956689-2ea866880c84',
+      badge: 'Quick Bite'
+    },
+    {
+      name: 'Masala Maggi',
+      description: 'Instant noodles with special spice blend',
+      price: 50,
+      category: 'Snacks',
+      image: 'https://images.unsplash.com/photo-1612929633738-8fe44f7ec841',
+      badge: 'Student Favorite'
+    },
+    {
+      name: 'Cold Coffee',
+      description: 'Creamy blended coffee with ice cream',
+      price: 60,
+      category: 'Beverages',
+      image: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735'
+    }
+  ]
+};
+
+function addToCart(itemName, price, image) {
     const existingItem = cart.find(item => item.name === itemName);
     
     if (existingItem) {
@@ -19,7 +97,7 @@ function addToCart(itemName, price) {
             price: price,
             quantity: 1,
             id: Date.now(),
-            image: productImages[itemName] // Add the image URL from our mapping
+            image: image
         });
     }
     
@@ -168,3 +246,46 @@ const toastStyles = `
 const styleSheet = document.createElement("style");
 styleSheet.textContent = toastStyles;
 document.head.appendChild(styleSheet);
+
+function selectCanteen(canteen) {
+  const selectedCanteenDiv = document.getElementById('selected-canteen');
+  const menuItems = document.querySelector('.menu-items');
+  
+  // Update selected canteen display
+  selectedCanteenDiv.innerHTML = `<h3>${canteen.toUpperCase().replace('-', ' ')} Menu</h3>`;
+  
+  // Load menu items for selected canteen
+  const menu = canteenMenus[canteen];
+  let menuHTML = '';
+  
+  menu.forEach(item => {
+    menuHTML += `
+      <div class="item" data-category="${item.category}">
+        <div class="item-img-container">
+          <img src="${item.image}" alt="${item.name}">
+          ${item.badge ? `<span class="badge">${item.badge}</span>` : ''}
+        </div>
+        <div class="item-details">
+          <h3>${item.name}</h3>
+          <p class="description">${item.description}</p>
+          <div class="item-footer">
+            <p class="price">₹${item.price}</p>
+            <button class="btn" onclick="addToCart('${item.name}', ${item.price}, '${item.image}')">
+              <i class="fas fa-cart-plus"></i> Add
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+  
+  menuItems.innerHTML = menuHTML;
+  
+  // Update product images mapping
+  menu.forEach(item => {
+    productImages[item.name] = item.image;
+  });
+  
+  // Scroll to menu section
+  document.getElementById('menu').scrollIntoView({ behavior: 'smooth' });
+}
